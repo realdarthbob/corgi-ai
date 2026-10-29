@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { initApi } from '@/api.ts';
+import { env } from '@/env.ts';
 
 const app = Fastify({
   logger: true
@@ -8,7 +9,7 @@ const app = Fastify({
 const start = async () => {
   try {
     await initApi(app);
-    await app.listen({ port: 3000, host: '0.0.0.0' });
+    await app.listen({ port: env.PORT, host: env.HOST });
   } catch (err) {
     app.log.error(err);
     process.exit(1);

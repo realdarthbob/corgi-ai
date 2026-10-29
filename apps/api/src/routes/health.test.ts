@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from 'fastify';
+import { healthResponseSchema } from '@corgi-ai/shared';
 import { initApi } from '@/api.ts';
 
 async function buildApp() {
@@ -16,7 +17,7 @@ test('GET /api/v1/health returns 200 ok', async (t) => {
   const res = await app.inject({ method: 'GET', url: '/api/v1/health' });
 
   assert.equal(res.statusCode, 200);
-  assert.deepEqual(res.json(), { status: 'ok' });
+  assert.deepEqual(healthResponseSchema.parse(res.json()), { status: 'ok' });
 });
 
 test('GET / returns running status', async (t) => {

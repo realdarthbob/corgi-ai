@@ -1,6 +1,10 @@
 **
 !package.json
 !package-lock.json
-!tsconfig.json
-!src/**
-src/**/*.test.ts
+!apps/*/package.json
+!apps/api/tsconfig.json
+!apps/api/src/**
+!packages/*/package.json
+!packages/config/tsconfig.base.json
+!packages/shared/src/**
+**/*.test.ts

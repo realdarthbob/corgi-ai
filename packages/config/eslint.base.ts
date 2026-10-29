@@ -1,9 +1,10 @@
 import js from '@eslint/js';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import prettier from 'eslint-config-prettier';
-import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+// Shared lint rules for every workspace. Each workspace's eslint.config.ts spreads this and adds
+// its own globals and `parserOptions.tsconfigRootDir` (which must point at that workspace).
 export default defineConfig(
   globalIgnores(['node_modules', 'dist', 'coverage']),
   js.configs.recommended,
@@ -11,10 +12,8 @@ export default defineConfig(
   tseslint.configs.stylisticTypeChecked,
   {
     languageOptions: {
-      globals: globals.node,
       parserOptions: {
-        projectService: { allowDefaultProject: ['*.js'] },
-        tsconfigRootDir: import.meta.dirname
+        projectService: true
       }
     },
     rules: {
